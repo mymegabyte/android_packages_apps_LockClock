@@ -123,6 +123,7 @@ public class WeatherUpdateService extends Service {
     }
 
     private boolean shouldUpdate(boolean force) {
+	return false;
         long interval = Preferences.weatherRefreshIntervalInMs(this);
         if (interval == 0 && !force) {
             if (D) Log.v(TAG, "Interval set to manual and update not forced, skip update");
@@ -334,7 +335,7 @@ public class WeatherUpdateService extends Service {
 
             AlarmManager am = (AlarmManager) mContext.getSystemService(ALARM_SERVICE);
             long elapseTime = SystemClock.elapsedRealtime() + LOCATION_REQUEST_TIMEOUT;
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, elapseTime, mTimeoutIntent);
+            //am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, elapseTime, mTimeoutIntent);
         }
 
         private void cancelTimeoutAlarm() {
@@ -385,16 +386,16 @@ public class WeatherUpdateService extends Service {
         long due = System.currentTimeMillis() + timeFromNow;
 
         if (D) Log.d(TAG, "Scheduling next update at " + new Date(due));
-        am.set(AlarmManager.RTC_WAKEUP, due, getUpdateIntent(context, force));
+        //am.set(AlarmManager.RTC_WAKEUP, due, getUpdateIntent(context, force));
     }
 
     public static void scheduleNextUpdate(Context context, boolean force) {
         long lastUpdate = Preferences.lastWeatherUpdateTimestamp(context);
         if (lastUpdate == 0 || force) {
-            scheduleUpdate(context, 0, true);
+           // scheduleUpdate(context, 0, true);
         } else {
             long interval = Preferences.weatherRefreshIntervalInMs(context);
-            scheduleUpdate(context, lastUpdate + interval - System.currentTimeMillis(), false);
+            //scheduleUpdate(context, lastUpdate + interval - System.currentTimeMillis(), false);
         }
     }
 
