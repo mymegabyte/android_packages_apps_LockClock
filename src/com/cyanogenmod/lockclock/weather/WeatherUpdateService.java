@@ -124,7 +124,8 @@ public class WeatherUpdateService extends Service {
 
     private boolean shouldUpdate(boolean force) {
 	return false;
-        long interval = Preferences.weatherRefreshIntervalInMs(this);
+        /*
+	long interval = Preferences.weatherRefreshIntervalInMs(this);
         if (interval == 0 && !force) {
             if (D) Log.v(TAG, "Interval set to manual and update not forced, skip update");
             return false;
@@ -146,6 +147,7 @@ public class WeatherUpdateService extends Service {
         }
 
         return WidgetUtils.isNetworkAvailable(this);
+	*/
     }
 
     private class WeatherUpdateTask extends AsyncTask<Void, Void, WeatherInfo> {
